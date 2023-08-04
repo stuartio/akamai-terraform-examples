@@ -1,0 +1,31 @@
+{
+  "additionalMatchOptions": [
+    {
+      "positiveMatch": false,
+      "type": "NetworkListCondition",
+      "values": [
+        "${nl}"
+      ]
+    },
+    {
+      "positiveMatch": true,
+      "type": "RequestMethodCondition",
+      "values": [
+        "POST"
+      ]
+    }
+  ],
+  "averageThreshold": 5,
+  "burstThreshold": 5,
+  "burstWindow": 5,
+  "clientIdentifier": "ip",
+  "description": "Mitigating HTTP flood attacks using POST requests.",
+  "matchType": "path",
+  "name": "POST Requests",
+  "pathMatchType": "Custom",
+  "pathUriPositiveMatch": true,
+  "requestType": "ClientRequest",
+  "sameActionOnIpv6": true,
+  "type": "WAF",
+  "useXForwardForHeaders": false
+}

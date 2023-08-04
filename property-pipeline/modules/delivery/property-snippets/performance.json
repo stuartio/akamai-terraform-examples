@@ -1,0 +1,434 @@
+{
+    "name": "Performance",
+    "children": [
+        {
+            "name": "Compressible objects",
+            "children": [],
+            "behaviors": [
+                {
+                    "name": "gzipResponse",
+                    "options": {
+                        "behavior": "ALWAYS"
+                    }
+                }
+            ],
+            "criteria": [
+                {
+                    "name": "contentType",
+                    "options": {
+                        "matchCaseSensitive": false,
+                        "matchOperator": "IS_ONE_OF",
+                        "matchWildcard": true,
+                        "values": [
+                            "application/*javascript*",
+                            "application/*json*",
+                            "application/*xml*",
+                            "application/text*",
+                            "application/vnd-ms-fontobject",
+                            "application/vnd.microsoft.icon",
+                            "application/x-font-opentype",
+                            "application/x-font-truetype",
+                            "application/x-font-ttf",
+                            "application/xmlfont/eot",
+                            "font/eot",
+                            "font/opentype",
+                            "font/otf",
+                            "image/svg+xml",
+                            "image/vnd.microsoft.icon",
+                            "image/x-icon",
+                            "text/*",
+                            "application/octet-stream*",
+                            "application/x-font-eot*",
+                            "application/font-ttf",
+                            "application/font-sfnt",
+                            "application/x-tgif"
+                        ]
+                    }
+                }
+            ],
+            "criteriaMustSatisfy": "all",
+            "comments": "Serve gzip compressed content for text-based formats."
+        },
+        {
+            "name": "Timeouts",
+            "children": [],
+            "behaviors": [
+                {
+                    "name": "dnsAsyncRefresh",
+                    "options": {
+                        "enabled": true,
+                        "timeout": "1h"
+                    }
+                },
+                {
+                    "name": "timeout",
+                    "options": {
+                        "value": "5s"
+                    }
+                },
+                {
+                    "name": "readTimeout",
+                    "options": {
+                        "value": "120s"
+                    }
+                }
+            ],
+            "criteria": [],
+            "criteriaMustSatisfy": "all",
+            "comments": "Optimize the connection between edge and origin."
+        },
+        {
+            "name": "HTTP/2",
+            "children": [],
+            "behaviors": [
+                {
+                    "name": "http2",
+                    "options": {
+                        "enabled": ""
+                    }
+                },
+                {
+                    "name": "allowTransferEncoding",
+                    "options": {
+                        "enabled": true
+                    }
+                }
+            ],
+            "criteria": [
+                {
+                    "name": "hostname",
+                    "options": {
+                        "matchOperator": "IS_ONE_OF",
+                        "values": [
+                            "*"
+                        ]
+                    }
+                }
+            ],
+            "criteriaMustSatisfy": "all",
+            "comments": "Serve your website using modern and fast protocols."
+        },
+        {
+            "name": "SureRoute",
+            "children": [],
+            "behaviors": [
+                {
+                    "name": "sureRoute",
+                    "options": {
+                        "enableCustomKey": false,
+                        "enabled": true,
+                        "forceSslForward": false,
+                        "raceStatTtl": "30m",
+                        "srDownloadLinkTitle": "",
+                        "testObjectUrl": "/akamai/sureroute-test-object.html",
+                        "toHostStatus": "INCOMING_HH",
+                        "type": "CUSTOM_MAP",
+                        "customMap": "${env.sureroute_map}"
+                    }
+                }
+            ],
+            "criteria": [],
+            "criteriaMustSatisfy": "all",
+            "comments": "Serve your website using modern and fast protocols."
+        },
+        {
+            "name": "Prefetching",
+            "children": [
+                {
+                    "name": "Prefetch",
+                    "children": [
+                        {
+                            "name": "Bots",
+                            "children": [],
+                            "behaviors": [
+                                {
+                                    "name": "prefetch",
+                                    "options": {
+                                        "enabled": false
+                                    }
+                                }
+                            ],
+                            "criteria": [
+                                {
+                                    "name": "userAgent",
+                                    "options": {
+                                        "matchCaseSensitive": false,
+                                        "matchOperator": "IS_ONE_OF",
+                                        "matchWildcard": true,
+                                        "values": [
+                                            "*bot*",
+                                            "*crawl*",
+                                            "*spider*"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "criteriaMustSatisfy": "all",
+                            "comments": "Disable prefetching for specific clients identifying themselves as bots and crawlers. This avoids requesting unnecessary resources from the origin."
+                        }
+                    ],
+                    "behaviors": [
+                        {
+                            "name": "prefetch",
+                            "options": {
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "criteria": [
+                        {
+                            "name": "fileExtension",
+                            "options": {
+                                "matchOperator": "IS_ONE_OF",
+                                "values": [
+                                    "EMPTY_STRING"
+                                ],
+                                "matchCaseSensitive": false
+                            }
+                        }
+                    ],
+                    "criteriaMustSatisfy": "all",
+                    "comments": "Define for which HTML pages prefetching should be enabled."
+                },
+                {
+                    "name": "Prefetchable objects",
+                    "children": [],
+                    "behaviors": [
+                        {
+                            "name": "prefetchable",
+                            "options": {
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "criteria": [
+                        {
+                            "name": "fileExtension",
+                            "options": {
+                                "matchCaseSensitive": false,
+                                "matchOperator": "IS_ONE_OF",
+                                "values": [
+                                    "css",
+                                    "js",
+                                    "jpg",
+                                    "jpeg",
+                                    "jp2",
+                                    "png",
+                                    "gif",
+                                    "svg",
+                                    "svgz",
+                                    "webp",
+                                    "eot",
+                                    "woff",
+                                    "woff2",
+                                    "otf",
+                                    "ttf"
+                                ]
+                            }
+                        }
+                    ],
+                    "criteriaMustSatisfy": "all",
+                    "comments": "Define which resources should be prefetched."
+                }
+            ],
+            "behaviors": [],
+            "criteria": [],
+            "criteriaMustSatisfy": "all",
+            "comments": "Instruct edge servers to retrieve embedded resources before the browser requests them."
+        },
+        {
+            "name": "Adaptive acceleration",
+            "children": [],
+            "behaviors": [
+                {
+                    "name": "adaptiveAcceleration",
+                    "options": {
+                        "enablePreconnect": true,
+                        "enablePush": true,
+                        "enableRo": true,
+                        "preloadEnable": true,
+                        "source": "mPulse",
+                        "titleHttp2ServerPush": "",
+                        "titlePreconnect": "",
+                        "titlePreload": "",
+                        "titleRo": ""
+                    }
+                }
+            ],
+            "criteria": [],
+            "criteriaMustSatisfy": "all",
+            "comments": "Automatically and continuously apply performance optimizations to your website using machine learning."
+        },
+        {
+            "name": "Resource Optimizer",
+            "children": [],
+            "behaviors": [
+                {
+                    "name": "adaptiveAcceleration",
+                    "options": {
+                        "enablePreconnect": false,
+                        "enablePush": false,
+                        "enableRo": true,
+                        "preloadEnable": false,
+                        "source": "mPulse",
+                        "titleHttp2ServerPush": "",
+                        "titlePreconnect": "",
+                        "titlePreload": "",
+                        "titleRo": ""
+                    }
+                }
+            ],
+            "criteria": [
+                {
+                    "name": "fileExtension",
+                    "options": {
+                        "matchOperator": "IS_ONE_OF",
+                        "values": [
+                            "css",
+                            "js",
+                            "svg"
+                        ],
+                        "matchCaseSensitive": false
+                    }
+                }
+            ],
+            "criteriaMustSatisfy": "all",
+            "comments": "Brotli compress css, js and svg"
+        },
+        {
+            "name": "Brotli Support",
+            "children": [],
+            "behaviors": [
+                {
+                    "name": "brotli",
+                    "options": {
+                        "enabled": true
+                    }
+                }
+            ],
+            "criteria": [
+                {
+                    "name": "fileExtension",
+                    "options": {
+                        "matchOperator": "IS_ONE_OF",
+                        "values": [
+                            "js",
+                            "css",
+                            "svg"
+                        ],
+                        "matchCaseSensitive": false
+                    }
+                }
+            ],
+            "criteriaMustSatisfy": "all"
+        },
+        {
+            "name": "mPulse",
+            "children": [],
+            "behaviors": [
+                {
+                    "name": "mPulse",
+                    "options": {
+                        "apiKey": "",
+                        "bufferSize": "",
+                        "configOverride": "",
+                        "enabled": true,
+                        "loaderVersion": "V12",
+                        "requirePci": false,
+                        "titleOptional": ""
+                    }
+                }
+            ],
+            "criteria": [],
+            "criteriaMustSatisfy": "all",
+            "comments": "Collect and analyze real-user data to monitor the performance of your website."
+        },
+        {
+            "name": "Script management",
+            "children": [],
+            "behaviors": [
+                {
+                    "name": "scriptManagement",
+                    "options": {
+                        "enabled": true,
+                        "serviceworker": "NO_SERVICE_WORKER"
+                    }
+                }
+            ],
+            "criteria": [],
+            "criteriaMustSatisfy": "all",
+            "comments": "Enable Script Management to minimize performance and availability impacts from third-party JavaScripts."
+        },
+        {
+            "name": "Adaptive Image Compression",
+            "children": [],
+            "behaviors": [
+                {
+                    "name": "adaptiveImageCompression",
+                    "options": {
+                        "title_aic_mobile": "",
+                        "title_aic_nonmobile": "",
+                        "compressMobile": true,
+                        "compressStandard": true,
+                        "tier1MobileCompressionMethod": "BYPASS",
+                        "tier2MobileCompressionMethod": "COMPRESS",
+                        "tier2MobileCompressionValue": 60,
+                        "tier3MobileCompressionMethod": "COMPRESS",
+                        "tier3MobileCompressionValue": 40,
+                        "tier1StandardCompressionMethod": "BYPASS",
+                        "tier2StandardCompressionMethod": "BYPASS",
+                        "tier3StandardCompressionMethod": "COMPRESS",
+                        "tier3StandardCompressionValue": 40
+                    }
+                }
+            ],
+            "criteria": [
+                {
+                    "name": "fileExtension",
+                    "options": {
+                        "matchCaseSensitive": false,
+                        "matchOperator": "IS_ONE_OF",
+                        "values": [
+                            "jpg",
+                            "jpeg",
+                            "jpe",
+                            "jif",
+                            "jfif",
+                            "jfi"
+                        ]
+                    }
+                }
+            ],
+            "criteriaMustSatisfy": "all",
+            "comments": "A default AIC behavior with a match on JPEG-compatible file extensions."
+        },
+        {
+            "name": "Device Characterization",
+            "children": [],
+            "behaviors": [
+                {
+                    "name": "deviceCharacteristicHeader",
+                    "options": {
+                        "elements": [
+                            "IS_MOBILE",
+                            "IS_TABLET"
+                        ]
+                    }
+                }
+            ],
+            "criteria": [],
+            "criteriaMustSatisfy": "all"
+        }
+    ],
+    "behaviors": [
+        {
+            "name": "enhancedAkamaiProtocol",
+            "options": {
+                "display": ""
+            }
+        }
+    ],
+    "criteria": [],
+    "criteriaMustSatisfy": "all",
+    "comments": "Control the settings related to improving the performance of delivering objects to your users."
+}

@@ -1,0 +1,9 @@
+{
+  "context": "DOSATCK",
+  "contextReadable": "DoS Attackers",
+  "enabled": false,
+  "id": 3104677,
+  "name": "DoS Attackers (High Threat)",
+  "sharedIpHandling": "NON_SHARED",
+  "threshold": 9
+}

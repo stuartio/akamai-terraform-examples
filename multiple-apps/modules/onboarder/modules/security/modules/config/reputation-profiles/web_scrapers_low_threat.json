@@ -1,0 +1,9 @@
+{
+  "context": "WEBSCRP",
+  "contextReadable": "Web Scrapers",
+  "enabled": false,
+  "id": 3104684,
+  "name": "Web Scrapers (Low Threat)",
+  "sharedIpHandling": "NON_SHARED",
+  "threshold": 5
+}

@@ -1,0 +1,44 @@
+{
+    "name": "Site Failover",
+    "children": [],
+    "behaviors": [
+        {
+            "name": "failAction",
+            "options": {
+                "netStoragePath": "${env.failover_netstorage_path}",
+                "enabled": true,
+                "actionType": "RECREATED_NS",
+                "netStorageHostname": {
+                    "downloadDomainName": "${env.failover_netstorage_group}",
+                    "cpCode": "${env.failover_netstorage_uploaddir}",
+                    "g2oToken": null
+                },
+                "cpCode": {
+                    "id": "${env.failover_cpcode}"
+                },
+                "statusCode": 503
+            }
+        }
+    ],
+    "criteria": [
+        {
+            "name": "originTimeout",
+            "options": {
+                "matchOperator": "ORIGIN_TIMED_OUT"
+            }
+        },
+        {
+            "name": "matchResponseCode",
+            "options": {
+                "matchOperator": "IS_ONE_OF",
+                "values": [
+                    "500",
+                    "503",
+                    "504"
+                ]
+            }
+        }
+    ],
+    "criteriaMustSatisfy": "any",
+    "comments": ""
+}

@@ -1,0 +1,9 @@
+{
+  "context": "WEBATCK",
+  "contextReadable": "Web Attackers",
+  "enabled": false,
+  "id": 3104681,
+  "name": "Web Attackers (High Threat)",
+  "sharedIpHandling": "NON_SHARED",
+  "threshold": 9
+}
