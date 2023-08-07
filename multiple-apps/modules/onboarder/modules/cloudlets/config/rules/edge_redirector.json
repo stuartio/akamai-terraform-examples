@@ -2,8 +2,6 @@
     {
         "type": "erMatchRule",
         "name": "Path3 to Path4",
-        "start": 0,
-        "end": 0,
         "matches": [
             {
                 "matchValue": "/path3",
@@ -16,13 +14,12 @@
         "statusCode": 302,
         "redirectURL": "/path4",
         "useIncomingQueryString": true,
-        "useRelativeUrl": "relative_url"
+        "useRelativeUrl": "relative_url",
+        "useIncomingSchemeAndHost": false
     },
     {
         "type": "erMatchRule",
         "name": "Path1 to Path2",
-        "start": 0,
-        "end": 0,
         "matches": [
             {
                 "matchValue": "/path1",
@@ -35,6 +32,7 @@
         "statusCode": 302,
         "redirectURL": "/path2",
         "useIncomingQueryString": true,
-        "useRelativeUrl": "relative_url"
+        "useRelativeUrl": "relative_url",
+        "useIncomingSchemeAndHost": false
     }
 ]

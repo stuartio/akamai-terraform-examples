@@ -1,3 +1,8 @@
+variable "notes" {
+  type        = string
+  description = "Execution notes, used to update certain elements"
+}
+
 variable "hostname" {
   type        = string
   description = "Hostname to include in configs/properties"

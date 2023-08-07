@@ -1,2 +1,5 @@
 *.tfvars
 !*.tfvars.sample
+*/.terraform/*
+terraform.tfstate*
+*/.terraform*

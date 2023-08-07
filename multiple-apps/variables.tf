@@ -1,3 +1,8 @@
+variable "notes" {
+  type        = string
+  description = "Execution notes, used to update certain elements"
+}
+
 variable "contract_id" {
   type        = string
   description = "Contract ID for property/config creation"
@@ -109,11 +114,6 @@ variable "enable_slow_post" {
   type        = bool
   default     = true
   description = "On/Off option for Slow Post feature"
-}
-
-variable "account_key" {
-  type        = string
-  description = "Account Switch Key, used in property activation hack"
 }
 
 variable "section" {

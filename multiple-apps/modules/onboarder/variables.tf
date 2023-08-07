@@ -1,3 +1,8 @@
+variable "notes" {
+  type        = string
+  description = "Execution notes, used to update certain elements"
+}
+
 variable "contract_id" {
   type        = string
   description = "Contract ID for property/config creation"
@@ -129,11 +134,6 @@ variable "enable_slow_post" {
   description = "On/Off option for Slow Post feature"
 }
 
-variable "account_key" {
-  type        = string
-  description = "Account Switch Key, used in property activation hack"
-}
-
 variable "section" {
   type        = string
   description = "EdgeRC section, used in property activation hack"
@@ -167,5 +167,11 @@ variable "include_cloudlets" {
 variable "include_property" {
   type        = bool
   description = "Boolean to control inclusion of Property module"
+  default     = false
+}
+
+variable "include_certificate" {
+  type        = bool
+  description = "Boolean to control inclusion of Certificate module"
   default     = false
 }

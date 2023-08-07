@@ -1,5 +1,5 @@
 locals {
-  certificate_count      = var.include_certififace ? 1 : 0
+  certificate_count      = var.include_certificate ? 1 : 0
   security_count         = var.include_security ? 1 : 0
   ivm_images_count       = var.include_ivm_images ? 1 : 0
   ivm_videos_count       = var.include_ivm_videos ? 1 : 0
@@ -49,44 +49,50 @@ module "ivm_videos" {
 }
 
 module "cloudlets_config" {
-  source   = "./cloudlets/config"
+  source   = "./modules/cloudlets/config"
   group_id = var.group_id
   hostname = var.hostname
   count    = local.cloudlets_count
 }
 
 module "property" {
-  source                    = "./modules/property"
-  contract_id               = var.contract_id
-  group_id                  = var.group_id
-  product_id                = var.product_id
-  hostname                  = var.hostname
-  rule_format               = var.rule_format
-  email                     = var.email
-  enhanced_tls              = var.enhanced_tls
-  ip_behavior               = var.ip_behavior
-  default_origin            = var.default_origin
-  certificate_id            = module.certificate[0].certificate_id
-  ivm_policyset_images      = module.ivm_images[0].image_policyset_id
-  ivm_policyset_videos      = module.ivm_videos[0].video_policyset_id
-  edge_redirector_policy_id = module.cloudlets[0].edge_redirector_policy_id
-  account_key               = var.account_key
-  section                   = var.section
-  sure_route_test_object    = var.sure_route_test_object
-  td_region                 = var.td_region
+  source                      = "./modules/property"
+  notes                       = var.notes
+  contract_id                 = var.contract_id
+  group_id                    = var.group_id
+  product_id                  = var.product_id
+  hostname                    = var.hostname
+  rule_format                 = var.rule_format
+  email                       = var.email
+  enhanced_tls                = var.enhanced_tls
+  ip_behavior                 = var.ip_behavior
+  default_origin              = var.default_origin
+  certificate_id              = var.include_certificate ? module.certificate[0].certificate_id : null
+  include_ivm_images          = var.include_ivm_images
+  ivm_images_policyset        = var.include_ivm_images ? module.ivm_images[0].image_policyset_id : "DISABLED"
+  include_ivm_videos          = var.include_ivm_videos
+  ivm_videos_policyset        = var.include_ivm_videos ? module.ivm_videos[0].video_policyset_id : "DISABLED-v"
+  include_cloudlets           = var.include_cloudlets
+  edge_redirector_policy_id   = var.include_cloudlets ? module.cloudlets_config[0].edge_redirector_policy_id : 0
+  edge_redirector_policy_name = var.include_cloudlets ? module.cloudlets_config[0].edge_redirector_policy_name : "DISABLED"
+  sure_route_test_object      = var.sure_route_test_object
+  td_region                   = var.td_region
   depends_on = [
     module.certificate,
-    module.ivm
+    module.ivm_images,
+    module.ivm_videos,
+    module.cloudlets_config
   ]
   count = local.property_count
 }
 
 module "cloudlets_activation" {
-  source                         = "./cloudlets/activation"
+  source                         = "./modules/cloudlets/activation"
   edge_redirector_policy_id      = module.cloudlets_config[0].edge_redirector_policy_id
   edge_redirector_policy_version = module.cloudlets_config[0].edge_redirector_policy_version
-  edge_redirector_properties     = module.property[0].property_id
+  edge_redirector_properties     = [var.hostname]
   count                          = local.property_count
+  depends_on                     = [module.property]
 }
 
 module "aap" {
@@ -96,6 +102,7 @@ module "aap" {
   hostname                    = var.hostname
   config_name                 = local.sanitized_project_name
   config_description          = var.security_config_description
+  notes                       = var.notes
   email                       = var.email
   ip_block_list_id            = module.network-lists[0].ip_block_list_id
   ip_block_list_exceptions_id = module.network-lists[0].ip_block_list_exceptions_id

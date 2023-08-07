@@ -7,6 +7,7 @@ Terraform library to onboard the following:
 - Property
 - Network Lists
 - AAP Config with single policy
+- Cloudlets (currently only Edge Redirector)
 
 Usage:
 
@@ -14,14 +15,13 @@ Usage:
 - run `terraform plan -out <plan name>` This will save the plan to `<plan name>`
 - run `terraform apply <plan name>`
 
-Note that each hostname in the supplied list will result in a separate property (each with multiple dedicated CP Codes). However, the module will only create one of each of the following:
-- IVM policy set for images
-- IVM policy set for videos
-- Set of network lists for various purposes
-- AAP config with a single policy
+Currently supported variables are below. Note that some may not be present in the terraform.tfvars.sample as they contain default values, and that all include_* variables default to false, so if you don't change at least one of them to true, nothing will happen
 
-Currently supported variables are below. Note that some may not be present in the terraform.tfvars.sample as they contain default values
-
+- include_security - Boolean to control inclusion of AAP and Network List modules
+- include_ivm_images - Boolean to control inclusion of Image Manager (Images) module
+- include_ivm_videos - Boolean to control inclusion of Image Manager (Videos) module
+- include_cloudlets - Boolean to control inclusion of Cloudlets module
+- include_property - Boolean to control inclusion of Property module
 - contract_id - Contract ID for property/config creation
 - group_id - Group ID for property/config creation
 - hostnames - List of hostnames to be used
@@ -41,5 +41,4 @@ Currently supported variables are below. Note that some may not be present in th
 - enable_siem - On/Off option for SIEM feature. Default = true
 - enable_client_rep - On/Off option for Client Reputation feature. Default = true
 - enable_slow_post - On/Off option for Slow Post feature. Default = true
-- account_key - Account Switch Key, used in property activation hack
-- section - EdgeRC section, used in property activation hack. Default = "default"
+- section - EdgeRC section

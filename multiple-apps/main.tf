@@ -1,5 +1,6 @@
 module "onboarder" {
   source                   = "./modules/onboarder"
+  notes                    = var.notes
   contract_id              = var.contract_id
   group_id                 = var.group_id
   product_id               = var.product_id
@@ -17,7 +18,6 @@ module "onboarder" {
   security_bypass_list     = var.security_bypass_list
   rate_bypass_list         = var.rate_bypass_list
   pragma_exceptions        = var.pragma_exceptions
-  account_key              = var.account_key
   section                  = var.section
   include_cloudlets        = var.include_cloudlets
   include_ivm_images       = var.include_ivm_images

@@ -1,3 +1,8 @@
+variable "notes" {
+  type        = string
+  description = "Execution notes, used to update certain elements"
+}
+
 variable "contract_id" {
   type        = string
   description = "Contract ID for property/config creation"
@@ -79,7 +84,7 @@ variable "include_ivm_images" {
   default     = false
 }
 
-variable "ivm_policyset_images" {
+variable "ivm_images_policyset" {
   type        = string
   description = "IVM (Images) policy set ID from IVM module"
 }
@@ -90,18 +95,23 @@ variable "include_ivm_videos" {
   default     = false
 }
 
-variable "ivm_policyset_videos" {
+variable "ivm_videos_policyset" {
   type        = string
   description = "IVM (Videos) policy set ID from IVM module"
 }
 
-variable "include_edge_redirector" {
+variable "include_cloudlets" {
   type        = bool
-  description = "Boolean to control inclusion of Edge Redirector behaviour"
-  default     = true
+  description = "Boolean to control inclusion of cloudlet behaviours"
+  default     = false
 }
 
 variable "edge_redirector_policy_id" {
   type        = number
   description = "Edge Redirector policy ID from cloudlets module"
+}
+
+variable "edge_redirector_policy_name" {
+  type        = string
+  description = "Edge Redirector policy name from cloudlets module"
 }

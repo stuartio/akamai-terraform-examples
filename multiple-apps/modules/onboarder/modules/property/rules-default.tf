@@ -34,7 +34,7 @@ data "akamai_property_rules_builder" "property_rule_default" {
       data.akamai_property_rules_builder.property_rule_strengthen_security.json,
       data.akamai_property_rules_builder.property_rule_increase_availability.json,
       data.akamai_property_rules_builder.property_rule_minimize_payload.json,
-      var.include_edge_redirector ? data.akamai_property_rules_builder.property_rule_edge_redirector.json : null,
+      var.include_cloudlets ? data.akamai_property_rules_builder.property_rule_edge_redirector.json : null,
       var.include_ivm_images ? data.akamai_property_rules_builder.property_rule_image_and_video_manager_-_images-.json : null,
       var.include_ivm_videos ? data.akamai_property_rules_builder.property_rule_image_and_video_manager_-_videos-.json : null,
     ])

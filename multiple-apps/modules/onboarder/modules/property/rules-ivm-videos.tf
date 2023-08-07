@@ -28,7 +28,15 @@ data "akamai_property_rules_builder" "property_rule_image_and_video_manager_-_vi
         super_cache_region      = "US"
         traffic_title           = ""
         use_existing_policy_set = true
-        policy_set              = var.ivm_policyset_videos
+        policy_set              = var.ivm_videos_policyset
+        cp_code_original {
+          id   = var.include_ivm_videos ? replace(akamai_cp_code.ivm_videos_pristine[0].id, "cpc_", "") : 0
+          name = var.include_ivm_videos ? akamai_cp_code.ivm_videos_pristine[0].name : "DISABLED"
+        }
+        cp_code_transformed {
+          id   = var.include_ivm_videos ? replace(akamai_cp_code.ivm_videos_derivative[0].id, "cpc_", "") : 0
+          name = var.include_ivm_videos ? akamai_cp_code.ivm_videos_derivative[0].name : "DISABLED"
+        }
       }
     }
   }

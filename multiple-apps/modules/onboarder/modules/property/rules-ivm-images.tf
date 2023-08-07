@@ -19,7 +19,6 @@ data "akamai_property_rules_builder" "property_rule_image_and_video_manager_-_im
     }
     behavior {
       image_manager {
-        advanced                = false
         api_reference_title     = ""
         apply_best_file_type    = true
         enabled                 = true
@@ -28,7 +27,15 @@ data "akamai_property_rules_builder" "property_rule_image_and_video_manager_-_im
         super_cache_region      = "US"
         traffic_title           = ""
         use_existing_policy_set = true
-        policy_set              = var.ivm_policyset_images
+        policy_set              = var.ivm_images_policyset
+        cp_code_original {
+          id   = var.include_ivm_images ? akamai_cp_code.ivm_images_pristine[0].id : 0
+          name = var.include_ivm_images ? akamai_cp_code.ivm_images_pristine[0].name : "DISABLED"
+        }
+        cp_code_transformed {
+          id   = var.include_ivm_images ? akamai_cp_code.ivm_images_derivative[0].id : 0
+          name = var.include_ivm_images ? akamai_cp_code.ivm_images_pristine[0].name : "DISABLED"
+        }
       }
     }
   }
