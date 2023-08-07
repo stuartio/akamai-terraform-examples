@@ -5,8 +5,8 @@ locals {
 resource "akamai_cps_dv_enrollment" "certificate" {
   contract_id                           = var.contract_id
   acknowledge_pre_verification_warnings = true
-  common_name                           = var.hostnames[0]
-  sans                                  = var.hostnames
+  common_name                           = var.hostname
+  sans                                  = [var.hostname]
   secure_network                        = local.secure_network
   sni_only                              = true
   admin_contact {
@@ -57,13 +57,4 @@ resource "akamai_cps_dv_enrollment" "certificate" {
     postal_code      = "02142"
     region           = "MA"
   }
-}
-
-output "certificate_id" {
-  value = akamai_cps_dv_enrollment.certificate.id
-}
-
-resource "local_file" "dns_challenges_json" {
-  content  = jsonencode(akamai_cps_dv_enrollment.certificate.dns_challenges)
-  filename = "dns_challenges.json"
 }
