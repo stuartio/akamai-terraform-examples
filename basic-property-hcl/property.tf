@@ -31,7 +31,7 @@ resource "akamai_edge_hostname" "ehn" {
 }
 
 resource "akamai_property" "property" {
-  name        = "tf-demo"
+  name        = "property"
   contract_id = data.akamai_contract.contract.id
   group_id    = data.akamai_group.group.id
   product_id  = "prd_Fresca"
@@ -46,5 +46,5 @@ resource "akamai_property" "property" {
     cname_to               = akamai_edge_hostname.ehn.edge_hostname
     cert_provisioning_type = "CPS_MANAGED"
   }
-  rules = data.akamai_property_rules_builder.smacleod-demo_rule_default.json
+  rules = data.akamai_property_rules_builder.property_rule_default.json
 }

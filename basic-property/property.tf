@@ -11,10 +11,10 @@ terraform {
   required_version = ">= 0.13"
 }
 
-# provider "akamai" {
-#   edgerc         = var.edgerc_path
-#   config_section = var.config_section
-# }
+provider "akamai" {
+  edgerc         = var.edgerc_path
+  config_section = var.config_section
+}
 
 # provider "akamai" {
 #   config {
@@ -26,10 +26,6 @@ terraform {
 #   }
 # }
 
-provider "akamai" {
-  edgerc = "~/.edgerc"
-  config_section = "terraform-ps"
-}
 
 locals {
   activation_version = (var.update_only == true) ? (akamai_property.smacleod-demo.latest_version - 1) : (akamai_property.smacleod-demo.latest_version)
@@ -93,8 +89,9 @@ resource "akamai_property" "smacleod-demo" {
 }
 
 resource "akamai_property_activation" "smacleod-demo" {
-  property_id = akamai_property.smacleod-demo.id
-  contact     = ["smacleod@akamai.com"]
-  version     = local.activation_version
-  network     = upper(var.env)
+  property_id                    = akamai_property.smacleod-demo.id
+  contact                        = ["smacleod@akamai.com"]
+  version                        = local.activation_version
+  network                        = upper(var.env)
+  auto_acknowledge_rule_warnings = true
 }

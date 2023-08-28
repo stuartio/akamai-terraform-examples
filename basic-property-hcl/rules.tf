@@ -1,5 +1,5 @@
 
-data "akamai_property_rules_builder" "tf-demo_rule_default" {
+data "akamai_property_rules_builder" "property_rule_default" {
   rules_v2023_01_05 {
     name      = "default"
     is_secure = false
@@ -56,54 +56,54 @@ data "akamai_property_rules_builder" "tf-demo_rule_default" {
       }
     }
     children = [
-      data.akamai_property_rules_builder.tf-demo_rule_augment_insights.json,
-      data.akamai_property_rules_builder.tf-demo_rule_accelerate_delivery.json,
-      data.akamai_property_rules_builder.tf-demo_rule_offload_origin.json,
-      data.akamai_property_rules_builder.tf-demo_rule_strengthen_security.json,
-      data.akamai_property_rules_builder.tf-demo_rule_increase_availability.json,
-      data.akamai_property_rules_builder.tf-demo_rule_minimize_payload.json,
+      data.akamai_property_rules_builder.property_rule_augment_insights.json,
+      data.akamai_property_rules_builder.property_rule_accelerate_delivery.json,
+      data.akamai_property_rules_builder.property_rule_offload_origin.json,
+      data.akamai_property_rules_builder.property_rule_strengthen_security.json,
+      data.akamai_property_rules_builder.property_rule_increase_availability.json,
+      data.akamai_property_rules_builder.property_rule_minimize_payload.json,
     ]
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_augment_insights" {
+data "akamai_property_rules_builder" "property_rule_augment_insights" {
   rules_v2023_01_05 {
     name                  = "Augment insights"
     is_secure             = false
     comments              = "Control the settings related to monitoring and reporting. This gives you additional visibility into your traffic and audiences."
     criteria_must_satisfy = "all"
     children = [
-      data.akamai_property_rules_builder.tf-demo_rule_traffic_reporting.json,
-      data.akamai_property_rules_builder.tf-demo_rule_m_pulse_rum.json,
-      data.akamai_property_rules_builder.tf-demo_rule_content_targeting.json,
-      data.akamai_property_rules_builder.tf-demo_rule_log_delivery.json,
-      data.akamai_property_rules_builder.tf-demo_rule_global_request_number.json,
-      data.akamai_property_rules_builder.tf-demo_rule_breadcrumbs.json,
+      data.akamai_property_rules_builder.property_rule_traffic_reporting.json,
+      data.akamai_property_rules_builder.property_rule_m_pulse_rum.json,
+      data.akamai_property_rules_builder.property_rule_content_targeting.json,
+      data.akamai_property_rules_builder.property_rule_log_delivery.json,
+      data.akamai_property_rules_builder.property_rule_global_request_number.json,
+      data.akamai_property_rules_builder.property_rule_breadcrumbs.json,
     ]
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_accelerate_delivery" {
+data "akamai_property_rules_builder" "property_rule_accelerate_delivery" {
   rules_v2023_01_05 {
     name                  = "Accelerate Delivery"
     is_secure             = false
     comments              = "Control the settings related to improving the performance of delivering objects to your users."
     criteria_must_satisfy = "all"
     children = [
-      data.akamai_property_rules_builder.tf-demo_rule_origin_connectivity.json,
-      data.akamai_property_rules_builder.tf-demo_rule_protocol_optimizations.json,
-      data.akamai_property_rules_builder.tf-demo_rule_http-3.json,
-      data.akamai_property_rules_builder.tf-demo_rule_prefetching.json,
-      data.akamai_property_rules_builder.tf-demo_rule_m_pulse.json,
-      data.akamai_property_rules_builder.tf-demo_rule_sure_route.json,
-      data.akamai_property_rules_builder.tf-demo_rule_adaptive_acceleration.json,
-      data.akamai_property_rules_builder.tf-demo_rule_resource_optimizer.json,
-      data.akamai_property_rules_builder.tf-demo_rule_script_management.json,
+      data.akamai_property_rules_builder.property_rule_origin_connectivity.json,
+      data.akamai_property_rules_builder.property_rule_protocol_optimizations.json,
+      data.akamai_property_rules_builder.property_rule_http-3.json,
+      data.akamai_property_rules_builder.property_rule_prefetching.json,
+      data.akamai_property_rules_builder.property_rule_m_pulse.json,
+      data.akamai_property_rules_builder.property_rule_sure_route.json,
+      data.akamai_property_rules_builder.property_rule_adaptive_acceleration.json,
+      data.akamai_property_rules_builder.property_rule_resource_optimizer.json,
+      data.akamai_property_rules_builder.property_rule_script_management.json,
     ]
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_offload_origin" {
+data "akamai_property_rules_builder" "property_rule_offload_origin" {
   rules_v2023_01_05 {
     name                  = "Offload origin"
     is_secure             = false
@@ -151,22 +151,22 @@ data "akamai_property_rules_builder" "tf-demo_rule_offload_origin" {
       }
     }
     children = [
-      data.akamai_property_rules_builder.tf-demo_rule_css_and_java_script.json,
-      data.akamai_property_rules_builder.tf-demo_rule_fonts.json,
-      data.akamai_property_rules_builder.tf-demo_rule_images.json,
-      data.akamai_property_rules_builder.tf-demo_rule_files.json,
-      data.akamai_property_rules_builder.tf-demo_rule_other_static_objects.json,
-      data.akamai_property_rules_builder.tf-demo_rule_html_pages.json,
-      data.akamai_property_rules_builder.tf-demo_rule_redirects.json,
-      data.akamai_property_rules_builder.tf-demo_rule_post_responses.json,
-      data.akamai_property_rules_builder.tf-demo_rule_graph_ql.json,
-      data.akamai_property_rules_builder.tf-demo_rule_uncacheable_objects.json,
-      data.akamai_property_rules_builder.tf-demo_rule_tiered_distribution.json,
+      data.akamai_property_rules_builder.property_rule_css_and_java_script.json,
+      data.akamai_property_rules_builder.property_rule_fonts.json,
+      data.akamai_property_rules_builder.property_rule_images.json,
+      data.akamai_property_rules_builder.property_rule_files.json,
+      data.akamai_property_rules_builder.property_rule_other_static_objects.json,
+      data.akamai_property_rules_builder.property_rule_html_pages.json,
+      data.akamai_property_rules_builder.property_rule_redirects.json,
+      data.akamai_property_rules_builder.property_rule_post_responses.json,
+      data.akamai_property_rules_builder.property_rule_graph_ql.json,
+      data.akamai_property_rules_builder.property_rule_uncacheable_objects.json,
+      data.akamai_property_rules_builder.property_rule_tiered_distribution.json,
     ]
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_strengthen_security" {
+data "akamai_property_rules_builder" "property_rule_strengthen_security" {
   rules_v2023_01_05 {
     name                  = "Strengthen security"
     is_secure             = false
@@ -179,41 +179,41 @@ data "akamai_property_rules_builder" "tf-demo_rule_strengthen_security" {
       }
     }
     children = [
-      data.akamai_property_rules_builder.tf-demo_rule_allowed_methods.json,
-      data.akamai_property_rules_builder.tf-demo_rule_obfuscate_debug_info.json,
-      data.akamai_property_rules_builder.tf-demo_rule_obfuscate_backend_info.json,
-      data.akamai_property_rules_builder.tf-demo_rule_hsts.json,
+      data.akamai_property_rules_builder.property_rule_allowed_methods.json,
+      data.akamai_property_rules_builder.property_rule_obfuscate_debug_info.json,
+      data.akamai_property_rules_builder.property_rule_obfuscate_backend_info.json,
+      data.akamai_property_rules_builder.property_rule_hsts.json,
     ]
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_increase_availability" {
+data "akamai_property_rules_builder" "property_rule_increase_availability" {
   rules_v2023_01_05 {
     name                  = "Increase availability"
     is_secure             = false
     comments              = "Control how to respond when your origin or third parties are slow or even down to minimize the negative impact on user experience."
     criteria_must_satisfy = "all"
     children = [
-      data.akamai_property_rules_builder.tf-demo_rule_simulate_failover.json,
-      data.akamai_property_rules_builder.tf-demo_rule_site_failover.json,
-      data.akamai_property_rules_builder.tf-demo_rule_origin_health.json,
+      data.akamai_property_rules_builder.property_rule_simulate_failover.json,
+      data.akamai_property_rules_builder.property_rule_site_failover.json,
+      data.akamai_property_rules_builder.property_rule_origin_health.json,
     ]
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_minimize_payload" {
+data "akamai_property_rules_builder" "property_rule_minimize_payload" {
   rules_v2023_01_05 {
     name                  = "Minimize payload"
     is_secure             = false
     comments              = "Control the settings that reduce the size of the delivered content and decrease the number of bytes sent by your properties. This allows you to cut down the network overhead of your website or API."
     criteria_must_satisfy = "all"
     children = [
-      data.akamai_property_rules_builder.tf-demo_rule_compressible_objects.json,
+      data.akamai_property_rules_builder.property_rule_compressible_objects.json,
     ]
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_traffic_reporting" {
+data "akamai_property_rules_builder" "property_rule_traffic_reporting" {
   rules_v2023_01_05 {
     name                  = "Traffic reporting"
     is_secure             = false
@@ -233,7 +233,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_traffic_reporting" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_m_pulse_rum" {
+data "akamai_property_rules_builder" "property_rule_m_pulse_rum" {
   rules_v2023_01_05 {
     name                  = "mPulse RUM"
     is_secure             = false
@@ -256,7 +256,7 @@ EOT
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_content_targeting" {
+data "akamai_property_rules_builder" "property_rule_content_targeting" {
   rules_v2023_01_05 {
     name                  = "Content Targeting"
     is_secure             = false
@@ -269,7 +269,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_content_targeting" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_log_delivery" {
+data "akamai_property_rules_builder" "property_rule_log_delivery" {
   rules_v2023_01_05 {
     name                  = "Log delivery"
     is_secure             = false
@@ -290,7 +290,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_log_delivery" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_global_request_number" {
+data "akamai_property_rules_builder" "property_rule_global_request_number" {
   rules_v2023_01_05 {
     name                  = "Global Request Number"
     is_secure             = false
@@ -304,7 +304,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_global_request_number" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_breadcrumbs" {
+data "akamai_property_rules_builder" "property_rule_breadcrumbs" {
   rules_v2023_01_05 {
     name                  = "Breadcrumbs"
     is_secure             = false
@@ -319,7 +319,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_breadcrumbs" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_origin_connectivity" {
+data "akamai_property_rules_builder" "property_rule_origin_connectivity" {
   rules_v2023_01_05 {
     name                  = "Origin connectivity"
     is_secure             = false
@@ -344,7 +344,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_origin_connectivity" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_protocol_optimizations" {
+data "akamai_property_rules_builder" "property_rule_protocol_optimizations" {
   rules_v2023_01_05 {
     name                  = "Protocol Optimizations"
     is_secure             = false
@@ -368,7 +368,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_protocol_optimizations" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_http-3" {
+data "akamai_property_rules_builder" "property_rule_http-3" {
   rules_v2023_01_05 {
     name                  = "HTTP/3"
     is_secure             = false
@@ -387,19 +387,19 @@ data "akamai_property_rules_builder" "tf-demo_rule_http-3" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_prefetching" {
+data "akamai_property_rules_builder" "property_rule_prefetching" {
   rules_v2023_01_05 {
     name                  = "Prefetching"
     is_secure             = false
     criteria_must_satisfy = "all"
     children = [
-      data.akamai_property_rules_builder.tf-demo_rule_prefetching_objects.json,
-      data.akamai_property_rules_builder.tf-demo_rule_prefetchable_objects.json,
+      data.akamai_property_rules_builder.property_rule_prefetching_objects.json,
+      data.akamai_property_rules_builder.property_rule_prefetchable_objects.json,
     ]
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_m_pulse" {
+data "akamai_property_rules_builder" "property_rule_m_pulse" {
   rules_v2023_01_05 {
     name                  = "mPulse"
     is_secure             = false
@@ -407,7 +407,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_m_pulse" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_sure_route" {
+data "akamai_property_rules_builder" "property_rule_sure_route" {
   rules_v2023_01_05 {
     name                  = "SureRoute"
     is_secure             = false
@@ -427,7 +427,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_sure_route" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_adaptive_acceleration" {
+data "akamai_property_rules_builder" "property_rule_adaptive_acceleration" {
   rules_v2023_01_05 {
     name                  = "Adaptive Acceleration"
     is_secure             = false
@@ -461,7 +461,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_adaptive_acceleration" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_resource_optimizer" {
+data "akamai_property_rules_builder" "property_rule_resource_optimizer" {
   rules_v2023_01_05 {
     name                  = "Resource Optimizer"
     is_secure             = false
@@ -494,7 +494,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_resource_optimizer" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_script_management" {
+data "akamai_property_rules_builder" "property_rule_script_management" {
   rules_v2023_01_05 {
     name                  = "Script Management"
     is_secure             = false
@@ -508,7 +508,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_script_management" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_prefetching_objects" {
+data "akamai_property_rules_builder" "property_rule_prefetching_objects" {
   rules_v2023_01_05 {
     name                  = "Prefetching objects"
     is_secure             = false
@@ -520,12 +520,12 @@ data "akamai_property_rules_builder" "tf-demo_rule_prefetching_objects" {
       }
     }
     children = [
-      data.akamai_property_rules_builder.tf-demo_rule_bots.json,
+      data.akamai_property_rules_builder.property_rule_bots.json,
     ]
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_prefetchable_objects" {
+data "akamai_property_rules_builder" "property_rule_prefetchable_objects" {
   rules_v2023_01_05 {
     name                  = "Prefetchable objects"
     is_secure             = false
@@ -546,7 +546,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_prefetchable_objects" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_bots" {
+data "akamai_property_rules_builder" "property_rule_bots" {
   rules_v2023_01_05 {
     name                  = "Bots"
     is_secure             = false
@@ -575,7 +575,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_bots" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_css_and_java_script" {
+data "akamai_property_rules_builder" "property_rule_css_and_java_script" {
   rules_v2023_01_05 {
     name                  = "CSS and JavaScript"
     is_secure             = false
@@ -598,7 +598,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_css_and_java_script" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_fonts" {
+data "akamai_property_rules_builder" "property_rule_fonts" {
   rules_v2023_01_05 {
     name                  = "Fonts"
     is_secure             = false
@@ -621,7 +621,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_fonts" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_images" {
+data "akamai_property_rules_builder" "property_rule_images" {
   rules_v2023_01_05 {
     name                  = "Images"
     is_secure             = false
@@ -644,7 +644,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_images" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_files" {
+data "akamai_property_rules_builder" "property_rule_files" {
   rules_v2023_01_05 {
     name                  = "Files"
     is_secure             = false
@@ -667,7 +667,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_files" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_other_static_objects" {
+data "akamai_property_rules_builder" "property_rule_other_static_objects" {
   rules_v2023_01_05 {
     name                  = "Other static objects"
     is_secure             = false
@@ -690,7 +690,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_other_static_objects" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_html_pages" {
+data "akamai_property_rules_builder" "property_rule_html_pages" {
   rules_v2023_01_05 {
     name                  = "HTML pages"
     is_secure             = false
@@ -718,7 +718,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_html_pages" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_redirects" {
+data "akamai_property_rules_builder" "property_rule_redirects" {
   rules_v2023_01_05 {
     name                  = "Redirects"
     is_secure             = false
@@ -739,7 +739,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_redirects" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_post_responses" {
+data "akamai_property_rules_builder" "property_rule_post_responses" {
   rules_v2023_01_05 {
     name                  = "POST responses"
     is_secure             = false
@@ -753,7 +753,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_post_responses" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_graph_ql" {
+data "akamai_property_rules_builder" "property_rule_graph_ql" {
   rules_v2023_01_05 {
     name                  = "GraphQL"
     is_secure             = false
@@ -775,7 +775,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_graph_ql" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_uncacheable_objects" {
+data "akamai_property_rules_builder" "property_rule_uncacheable_objects" {
   rules_v2023_01_05 {
     name                  = "Uncacheable objects"
     is_secure             = false
@@ -795,7 +795,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_uncacheable_objects" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_tiered_distribution" {
+data "akamai_property_rules_builder" "property_rule_tiered_distribution" {
   rules_v2023_01_05 {
     name                  = "Tiered Distribution"
     is_secure             = false
@@ -809,7 +809,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_tiered_distribution" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_allowed_methods" {
+data "akamai_property_rules_builder" "property_rule_allowed_methods" {
   rules_v2023_01_05 {
     name                  = "Allowed methods"
     is_secure             = false
@@ -821,16 +821,16 @@ data "akamai_property_rules_builder" "tf-demo_rule_allowed_methods" {
       }
     }
     children = [
-      data.akamai_property_rules_builder.tf-demo_rule_post.json,
-      data.akamai_property_rules_builder.tf-demo_rule_options.json,
-      data.akamai_property_rules_builder.tf-demo_rule_put.json,
-      data.akamai_property_rules_builder.tf-demo_rule_delete.json,
-      data.akamai_property_rules_builder.tf-demo_rule_patch.json,
+      data.akamai_property_rules_builder.property_rule_post.json,
+      data.akamai_property_rules_builder.property_rule_options.json,
+      data.akamai_property_rules_builder.property_rule_put.json,
+      data.akamai_property_rules_builder.property_rule_delete.json,
+      data.akamai_property_rules_builder.property_rule_patch.json,
     ]
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_obfuscate_debug_info" {
+data "akamai_property_rules_builder" "property_rule_obfuscate_debug_info" {
   rules_v2023_01_05 {
     name                  = "Obfuscate debug info"
     is_secure             = false
@@ -844,7 +844,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_obfuscate_debug_info" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_obfuscate_backend_info" {
+data "akamai_property_rules_builder" "property_rule_obfuscate_backend_info" {
   rules_v2023_01_05 {
     name                  = "Obfuscate backend info"
     is_secure             = false
@@ -877,7 +877,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_obfuscate_backend_info" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_hsts" {
+data "akamai_property_rules_builder" "property_rule_hsts" {
   rules_v2023_01_05 {
     name                  = "HSTS"
     is_secure             = false
@@ -891,7 +891,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_hsts" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_post" {
+data "akamai_property_rules_builder" "property_rule_post" {
   rules_v2023_01_05 {
     name                  = "POST"
     is_secure             = false
@@ -906,7 +906,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_post" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_options" {
+data "akamai_property_rules_builder" "property_rule_options" {
   rules_v2023_01_05 {
     name                  = "OPTIONS"
     is_secure             = false
@@ -920,7 +920,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_options" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_put" {
+data "akamai_property_rules_builder" "property_rule_put" {
   rules_v2023_01_05 {
     name                  = "PUT"
     is_secure             = false
@@ -934,7 +934,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_put" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_delete" {
+data "akamai_property_rules_builder" "property_rule_delete" {
   rules_v2023_01_05 {
     name                  = "DELETE"
     is_secure             = false
@@ -948,7 +948,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_delete" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_patch" {
+data "akamai_property_rules_builder" "property_rule_patch" {
   rules_v2023_01_05 {
     name                  = "PATCH"
     is_secure             = false
@@ -962,7 +962,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_patch" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_simulate_failover" {
+data "akamai_property_rules_builder" "property_rule_simulate_failover" {
   rules_v2023_01_05 {
     name                  = "Simulate failover"
     is_secure             = false
@@ -992,7 +992,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_simulate_failover" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_site_failover" {
+data "akamai_property_rules_builder" "property_rule_site_failover" {
   rules_v2023_01_05 {
     name                  = "Site failover"
     is_secure             = false
@@ -1011,7 +1011,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_site_failover" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_origin_health" {
+data "akamai_property_rules_builder" "property_rule_origin_health" {
   rules_v2023_01_05 {
     name                  = "Origin health"
     is_secure             = false
@@ -1027,7 +1027,7 @@ data "akamai_property_rules_builder" "tf-demo_rule_origin_health" {
   }
 }
 
-data "akamai_property_rules_builder" "tf-demo_rule_compressible_objects" {
+data "akamai_property_rules_builder" "property_rule_compressible_objects" {
   rules_v2023_01_05 {
     name                  = "Compressible objects"
     is_secure             = false
