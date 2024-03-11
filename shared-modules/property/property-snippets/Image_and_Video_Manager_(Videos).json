@@ -1,0 +1,47 @@
+{
+    "name": "Image and Video Manager (Videos)",
+    "children": [],
+    "behaviors": [
+        {
+            "name": "caching",
+            "options": {
+                "behavior": "MAX_AGE",
+                "mustRevalidate": false,
+                "ttl": "30d"
+            }
+        },
+        {
+            "name": "imageManagerVideo",
+            "options": {
+                "apiReferenceTitle": "",
+                "applyBestFileType": true,
+                "enabled": true,
+                "resize": false,
+                "settingsTitle": "",
+                "useExistingPolicySet": true,
+                "trafficTitle": "",
+                "cpCodeOriginal": {
+                    "id": "${env.cpcode_ivm_videos_pristine}"
+                },
+                "cpCodeTransformed": {
+                    "id": "${env.cpcode_ivm_videos_derivative}"
+                },
+                "policySet": "${env.ivm_videos_policyset}"
+            }
+        }
+    ],
+    "criteria": [
+        {
+            "name": "fileExtension",
+            "options": {
+                "matchCaseSensitive": false,
+                "matchOperator": "IS_ONE_OF",
+                "values": [
+                    "mp4"
+                ]
+            }
+        }
+    ],
+    "criteriaMustSatisfy": "all",
+    "comments": "Enable Scale for Mobile to serve the best available size for the requesting device. (Careful testing is highly recommended.) Enable Use Best File Type to serve the video format that works best for the requesting client. To configure breakpoint widths, derivative image quality, and artistic transformations, save and activate this configuration; then, create policies for this policy set via either Image and Video Manager Policy Manager or the OPEN Image and Video Manager API."
+}

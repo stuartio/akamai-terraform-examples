@@ -1,0 +1,38 @@
+[
+    {
+        "type": "erMatchRule",
+        "name": "Path3 to Path4",
+        "matches": [
+            {
+                "matchValue": "/path3",
+                "matchOperator": "equals",
+                "negate": false,
+                "caseSensitive": false,
+                "matchType": "path"
+            }
+        ],
+        "statusCode": 302,
+        "redirectURL": "/path4",
+        "useIncomingQueryString": true,
+        "useRelativeUrl": "relative_url",
+        "useIncomingSchemeAndHost": false
+    },
+    {
+        "type": "erMatchRule",
+        "name": "Path1 to Path2",
+        "matches": [
+            {
+                "matchValue": "/path1",
+                "matchOperator": "equals",
+                "negate": false,
+                "caseSensitive": false,
+                "matchType": "path"
+            }
+        ],
+        "statusCode": 302,
+        "redirectURL": "/path2",
+        "useIncomingQueryString": true,
+        "useRelativeUrl": "relative_url",
+        "useIncomingSchemeAndHost": false
+    }
+]

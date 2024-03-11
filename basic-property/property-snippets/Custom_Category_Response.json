@@ -1,0 +1,39 @@
+{
+  "behaviors": [
+    {
+      "name": "constructResponse",
+      "options": {
+        "body": "Your category is: {{user.PMUSER_CATEGORY}}",
+        "enabled": true,
+        "forceEviction": true,
+        "ignorePurge": true,
+        "responseCode": 200
+      }
+    },
+    {
+      "name": "modifyOutgoingResponseHeader",
+      "options": {
+        "action": "MODIFY",
+        "avoidDuplicateHeaders": false,
+        "newHeaderValue": "text/plain",
+        "standardModifyHeaderName": "CONTENT_TYPE"
+      }
+    }
+  ],
+  "criteria": [
+    {
+      "name": "path",
+      "options": {
+        "matchCaseSensitive": false,
+        "matchOperator": "MATCHES_ONE_OF",
+        "normalize": false,
+        "values": [
+          "/category"
+        ]
+      }
+    }
+  ],
+  "name": "Custom Category Response",
+  "options": {},
+  "criteriaMustSatisfy": "all"
+}
