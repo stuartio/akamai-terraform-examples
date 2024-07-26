@@ -2,13 +2,10 @@ terraform {
   required_providers {
     akamai = {
       source  = "akamai/akamai"
-      version = ">= 5.6.0"
-    }
-    jsonnet = {
-      source = "alxrem/jsonnet"
+      version = ">= 6.1.0"
     }
   }
-  required_version = ">= 0.13"
+  required_version = ">= 1.8"
 }
 
 provider "akamai" {
@@ -16,15 +13,14 @@ provider "akamai" {
   config_section = var.config_section
 }
 
-# provider "akamai" {
-#   config {
-#     access_token = var.akamai_access_token
-#     host = var.akamai_host
-#     client_token = var.akamai_client_token
-#     client_secret = var.akamai_client_secret
-#     account_key = var.akamai_account_key
-#   }
-# }
+provider "akamai" {
+  config {
+    access_token  = var.akamai_access_token
+    host          = var.akamai_host
+    client_token  = var.akamai_client_token
+    client_secret = var.akamai_client_secret
+  }
+}
 
 
 locals {
