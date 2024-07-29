@@ -1,3 +1,8 @@
+locals {
+  cidrs     = jsondecode(data.external.siteshield.result.json).currentCidrs
+  hostnames = jsondecode(data.external.selectable_hostnames.result.json)
+}
+
 data "external" "siteshield" {
   program = ["pwsh", "-NoProfile", "${path.module}/external/tf-pwsh.ps1"]
 
@@ -22,9 +27,9 @@ data "external" "selectable_hostnames" {
 }
 
 output "cidrs" {
-  value = jsondecode(data.external.siteshield.result.json).currentCidrs
+  value = local.cidrs
 }
 
 output "hostnames" {
-  value = jsondecode(data.external.selectable_hostnames.result.json)
+  value = local.hostnames
 }
