@@ -1,50 +1,30 @@
-terraform {
-  required_providers {
-    akamai = {
-      source  = "akamai/akamai"
-      version = ">= 2.0.0"
-    }
-  }
-  required_version = ">= 0.13"
-}
-
-provider "akamai" {
-  edgerc         = var.edgerc_path
-  config_section = var.config_section
-}
-
-data "akamai_group" "group" {
-  group_name  = "group1"
-  contract_id = "ctr_1-2ABC11"
-}
-
-data "akamai_contract" "contract" {
-  group_name = data.akamai_group.group.group_name
-}
-
-resource "akamai_edge_hostname" "ehn" {
-  product_id    = "prd_Fresca"
-  contract_id   = data.akamai_contract.contract.id
-  group_id      = data.akamai_group.group.id
-  ip_behavior   = "IPV4"
-  edge_hostname = "www.example.com.edgesuite.net"
+resource "akamai_cp_code" "default" {
+  name        = var.property_name
+  contract_id = var.contract_id
+  group_id    = var.group_id
+  product_id  = var.product_id
 }
 
 resource "akamai_property" "property" {
-  name        = "property"
-  contract_id = data.akamai_contract.contract.id
-  group_id    = data.akamai_group.group.id
+  name        = var.property_name
+  contract_id = var.contract_id
+  group_id    = var.group_id
   product_id  = var.product_id
   rule_format = var.rule_format
   hostnames {
-    cname_from             = "www.example.com"
-    cname_to               = akamai_edge_hostname.ehn.edge_hostname
-    cert_provisioning_type = "CPS_MANAGED"
+    cname_from             = var.hostname
+    cname_to               = "${var.hostname}.edgesuite.net"
+    cert_provisioning_type = "DEFAULT"
   }
-  hostnames {
-    cname_from             = "api.example.com"
-    cname_to               = akamai_edge_hostname.ehn.edge_hostname
-    cert_provisioning_type = "CPS_MANAGED"
-  }
-  rules = data.akamai_property_rules_builder.property_rule_default.json
+  rules         = data.akamai_property_rules_builder.property_rule_default.json
+  version_notes = "Configured by Terraform"
+}
+
+resource "akamai_property_activation" "activate" {
+  property_id                    = akamai_property.property.id
+  contact                        = [var.email]
+  version                        = akamai_property.property.latest_version
+  network                        = var.environment
+  note                           = "Activated by Terraform"
+  auto_acknowledge_rule_warnings = true
 }

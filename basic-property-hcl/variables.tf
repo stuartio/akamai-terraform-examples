@@ -1,24 +1,65 @@
 variable "edgerc_path" {
-  type    = string
-  default = "~/.edgerc"
+  type        = string
+  default     = "~/.edgerc"
+  description = "Path to .edgerc file. Defaults to ~/.edgerc"
 }
 
 variable "config_section" {
-  type    = string
-  default = "terraform-ps"
+  type        = string
+  default     = "default"
+  description = "EdgeRC section. Change this to switch between accounts, assuming your section has an account_id member"
 }
 
-variable "env" {
-  type    = string
-  default = "staging"
+variable "contract_id" {
+  type        = string
+  description = "Contract ID"
+}
+
+variable "group_id" {
+  type        = string
+  description = "Group ID"
+}
+
+variable "environment" {
+  type        = string
+  default     = "STAGING"
+  description = "STAGING or PRODUCTION. Used to flip activation resources"
+}
+
+variable "property_name" {
+  type        = string
+  description = "Name for your property"
+}
+
+variable "hostname" {
+  type        = string
+  description = "hostname for your property"
 }
 
 variable "product_id" {
-  type    = string
-  default = "Fresca"
+  type        = string
+  default     = "Fresca"
+  description = "Product ID. Defaults to Ion Standard"
 }
 
 variable "rule_format" {
-  type    = string
-  default = "latest"
+  type        = string
+  default     = "v2024-08-13"
+  description = "Static rule format schema. This is required when using HCL rules and must match the data source format."
+}
+
+variable "default_origin" {
+  type        = string
+  description = "Default origin server for all properties"
+}
+
+variable "sure_route_test_object" {
+  type        = string
+  description = "Test object path for SureRoute"
+  default     = "/akamai/testobject.html"
+}
+
+variable "email" {
+  type        = string
+  description = "Notification email address for activation command"
 }
