@@ -2,7 +2,6 @@ locals {
   ehn_domain               = (var.enhanced_tls == true) ? "edgekey.net" : "edgesuite.net"
   ehn_certificate          = (var.enhanced_tls == true) ? var.certificate_id : null
   ivm_images_cpcodes_count = var.include_ivm_images ? 1 : 0
-  ivm_videos_cpcodes_count = var.include_ivm_videos ? 1 : 0
 }
 
 resource "akamai_cp_code" "default" {
@@ -28,22 +27,6 @@ resource "akamai_cp_code" "ivm_images_derivative" {
   count       = local.ivm_images_cpcodes_count
 }
 
-resource "akamai_cp_code" "ivm_videos_pristine" {
-  name        = "${var.hostname}-ivm-pristine"
-  contract_id = var.contract_id
-  group_id    = var.group_id
-  product_id  = var.product_id
-  count       = local.ivm_videos_cpcodes_count
-}
-
-resource "akamai_cp_code" "ivm_videos_derivative" {
-  name        = "${var.hostname}-ivm-derivative"
-  contract_id = var.contract_id
-  group_id    = var.group_id
-  product_id  = var.product_id
-  count       = local.ivm_videos_cpcodes_count
-}
-
 resource "akamai_edge_hostname" "edge_hostname" {
   product_id    = var.product_id
   contract_id   = var.contract_id
@@ -51,6 +34,16 @@ resource "akamai_edge_hostname" "edge_hostname" {
   edge_hostname = "${var.hostname}.${local.ehn_domain}"
   certificate   = local.ehn_certificate
   ip_behavior   = var.ip_behavior
+}
+
+module "rules" {
+  source = "./rules"
+  default_origin = var.default_origin
+  default_cpcode = parseint(replace(akamai_cp_code.default.id, "cpc_", ""), 10)
+  include_ivm_images = var.include_ivm_images
+  ivm_images_derivative_cp_code = var.include_ivm_images ? parseint(replace(akamai_cp_code.ivm_images_derivative[0].id, "cpc_", ""), 10) : 0
+  ivm_images_pristine_cp_code = var.include_ivm_images ? parseint(replace(akamai_cp_code.ivm_images_pristine[0].id, "cpc_", ""), 10) : 0
+  ivm_images_policyset = var.ivm_images_policyset
 }
 
 resource "akamai_property" "property" {
@@ -65,8 +58,9 @@ resource "akamai_property" "property" {
     cert_provisioning_type = "CPS_MANAGED"
   }
 
-  rule_format = var.rule_format
-  rules       = replace(data.akamai_property_rules_builder.property_rule_default.json, "\"rules\"", "\"comments\": \"${var.notes}\", \"rules\"")
+  rule_format = module.rules.rule_format
+  rules       = module.rules.rules
+  version_notes = var.notes
   depends_on = [
     akamai_edge_hostname.edge_hostname
   ]

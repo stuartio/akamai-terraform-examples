@@ -48,7 +48,7 @@ variable "product_id" {
 variable "rule_format" {
   type        = string
   description = "Property rule format"
-  default     = "latest"
+  default     = "v2025-01-13"
 }
 
 variable "sure_route_test_object" {
@@ -87,35 +87,5 @@ variable "include_ivm_images" {
 variable "ivm_images_policyset" {
   type        = string
   description = "IVM (Images) policy set ID from IVM module. If include_ivm_images is true then this is required."
-  default     = ""
-}
-
-variable "include_ivm_videos" {
-  type        = bool
-  description = "Boolean to control inclusion of Image Manager (Videos) behaviour"
-  default     = false
-}
-
-variable "ivm_videos_policyset" {
-  type        = string
-  description = "IVM (Videos) policy set ID from IVM module"
-  default     = ""
-}
-
-variable "include_cloudlets" {
-  type        = bool
-  description = "Boolean to control inclusion of cloudlet behaviours"
-  default     = false
-}
-
-variable "edge_redirector_policy_id" {
-  type        = number
-  description = "Edge Redirector policy ID from cloudlets module. If include_cloudlets is true, then this variable is required."
-  default     = 0
-}
-
-variable "edge_redirector_policy_name" {
-  type        = string
-  description = "Edge Redirector policy name from cloudlets module. If include_cloudlets is true, then this variable is required."
   default     = ""
 }

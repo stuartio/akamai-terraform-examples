@@ -27,22 +27,6 @@ resource "akamai_edge_hostname" "edge_host" {
   ip_behavior   = "IPV6_COMPLIANCE"
 }
 
-data "jsonnet_file" "rule_jsonnet" {
-  ext_code = {
-    origin1                       = jsonencode(var.origin1)
-    cpcode1                       = parseint(replace(akamai_cp_code.cp_code.id, "cpc_", ""), 10)
-    siteshield_map                = jsonencode(var.siteshield_map)
-    sureroute_map                 = jsonencode(var.sureroute_map)
-    failover_netstorage_group     = jsonencode(var.failover_netstorage_group)
-    failover_netstorage_uploaddir = var.failover_netstorage_uploaddir
-    failover_netstorage_path      = jsonencode(var.failover_netstorage_path)
-    failover_cpcode               = var.failover_netstorage_cpcode
-    hostnames                     = jsonencode(var.hostnames)
-  }
-
-  source = "${path.module}/jsonnet/rules.jsonnet"
-}
-
 resource "akamai_property" "property" {
   name        = var.property_name
   product_id  = var.product_id
@@ -60,7 +44,8 @@ resource "akamai_property" "property" {
   }
 
   rule_format = var.rule_format
-  rules       = replace(data.jsonnet_file.rule_jsonnet.rendered, "\"rules\"", "\"comments\": \"${local.version_notes}\", \"rules\"")
+  rules       = data.akamai_property_rules_template.rules.json
+  version_notes = "Updated by Terraform"
   depends_on = [
     akamai_edge_hostname.edge_host
   ]
@@ -86,13 +71,6 @@ resource "akamai_property_activation" "activate_prod" {
   ]
   count = local.prod_activation_count
 }
-
-resource "local_file" "rules_json" {
-  content  = data.jsonnet_file.rule_jsonnet.rendered
-  filename = "rules.json"
-}
-
-
 
 data "akamai_property_rules_template" "rules" {
   template_file = abspath("${path.module}/property-snippets/main.json")
