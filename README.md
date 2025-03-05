@@ -2,10 +2,13 @@
 
 This repo contains various examples of using Terraform to deploy Akamai configuration. Each folder is a self-contained collection of TF configs, described below:
 
-- basic-property - A simple Property Manager property with examples of the same rule tree in JSON snippets and JSONNET format
 - basic-property-hcl - A simple Property Manager property with its rule tree represented as akamai_property_rules_builder data sources in a single file
+- basic-property-json - A simple Property Manager property with its rule tree represented as json snippets
+- basic-property-jsonnet - A simple Property Manager property with its rule tree represented as jsonnet
 - certificate - A CPS DV certificate enrollment
 - dns - An EdgeDNS zone
+- external_pwsh - Example of using the Terraform external resource type to run PowerShell commands in order to expand Terraform functionality
+- import-converter - Python script to convert terraform import commands from the Akamai terraform CLI to inline Terraform import resources
 - multi-pipeline - This folder contains a single module covering the following apps, as well as multiple environment instances to be used in a pipeline configuration
     - Property Manager
     - Network Lists
